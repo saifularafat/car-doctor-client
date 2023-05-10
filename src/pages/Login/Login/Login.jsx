@@ -1,9 +1,19 @@
+import { Link } from 'react-router-dom';
 import img from '../../../assets/images/login/login.svg'
+import { FaFacebookF, FaLinkedinIn, FaGoogle } from 'react-icons/fa';
+import { useContext } from 'react';
+import { AuthContext } from '../../../AuthProvider/AuthProvider';
 
 const Login = () => {
-
+    const { user } = useContext(AuthContext)
+    // console.log(user);
     const handlerLogin = event => {
         event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password);
+
     }
     return (
         <div className="hero min-h-screen bg-base-200 rounded-xl">
@@ -19,25 +29,48 @@ const Login = () => {
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input type="text" placeholder="email" className="input input-bordered" />
+                                <input
+                                    type="email"
+                                    name='email'
+                                    required
+                                    placeholder="your email" className="input input-bordered" />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="text" placeholder="password" className="input input-bordered" />
-                                <label className="label">
-                                    <a href="" className="label-text-alt link link-hover">Forgot password?</a>
-                                </label>
+                                <input
+                                    type="password"
+                                    name='password'
+                                    required
+                                    placeholder="password" className="input input-bordered" />
                             </div>
                             <div className="form-control mt-6">
                                 <input type="submit" value="Sign In" className="main_btn" />
                             </div>
                             <p className='text-center my-7'>Or Sign In with</p>
-                            <div>
-                                
+                            <div className=' text-center mb-7'>
+                                <p className='inline-flex'>
+                                    <span
+                                        className='p-3 bg-slate-200 rounded-full'>
+                                        <FaFacebookF className='w-5 h-5' />
+                                    </span>
+                                    <span
+                                        className='p-3 mx-4 bg-slate-200 rounded-full'>
+                                        <FaLinkedinIn className='w-5 h-5' />
+                                    </span>
+                                    <span
+                                        className='p-3 bg-slate-200 rounded-full'>
+                                        <FaGoogle className='w-5 h-5' />
+                                    </span>
+                                </p>
                             </div>
-                            <p className='text-center text-description-color text-lg font-inter'>Have an account?<span className='text-color-btn  font-semibold'> Sign In</span></p>
+                            <p className='text-center text-description-color text-lg font-inter'>Have an account?
+                                <Link to='/register'>
+                                    <span className='text-color-btn  font-semibold hover:underline'> Sign Up
+                                    </span>
+                                </Link>
+                            </p>
                         </div>
                     </form>
                 </div>
