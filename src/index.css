@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.header_btn {
+    @apply md:py-3 py-2 px-6 text-lg font-inter font-semibold bg-transparent text-color-btn border-[2px]
+        border-color-btn rounded-lg transition duration-200
+        hover:bg-color-btn hover:text-white
+}
+
+.slider_btn1{
+    @apply bg-[#485669] text-white border-[#485669]
+        hover:bg-[#485669] hover:border-[#485669]
+}
+
+.slider_btn2{
+    @apply bg-color-btn text-white border-color-btn
+        hover:bg-color-btn hover:border-color-btn
+}
+
+.main_btn{
+    @apply md:py-3 py-2 px-6 text-xl font-inter text-white font-medium
+        bg-color-btn hover:bg-transparent border-[2px] 
+        rounded-lg border-color-btn transition duration-200
+        hover:border-color-btn hover:text-color-btn
+}
+.banner_btn {
+    @apply md:py-3 py-2 px-6 text-xl font-inter font-medium border-[2px] 
+        rounded-lg transition duration-200 border-white
+        text-white hover:bg-color-btn hover:border-color-btn
+}
