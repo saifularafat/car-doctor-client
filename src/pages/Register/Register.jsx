@@ -1,8 +1,15 @@
 import { Link } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
 import { FaFacebookF, FaGoogle, FaLinkedinIn, FaEyeSlash, FaRegEyeSlash } from "react-icons/fa";
+import { useContext } from 'react';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
 
 const Register = () => {
+    const { createUser, loader } = useContext(AuthContext)
+    if(loader){
+        return <p>Loading.....</p>
+    }
+
     const handlerRegister = event => {
         event.preventDefault();
         const form = event.target;
@@ -11,6 +18,15 @@ const Register = () => {
         const password = form.password.value;
         const checkbox = form.checkbox.value;
         console.log(name, email, password, checkbox);
+
+        createUser(email, password)
+            .then(result => {
+                const user = result.user
+                console.log(user);
+            })
+            .catch( error => {
+                console.log(error);
+            })
     }
     return (
         <div className="hero min-h-screen bg-base-200 rounded-xl">

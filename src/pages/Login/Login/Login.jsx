@@ -5,14 +5,28 @@ import { useContext } from 'react';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
 
 const Login = () => {
-    const { user } = useContext(AuthContext)
+    const { loader,  signIn } = useContext(AuthContext)
     // console.log(user);
+
+    if(loader){
+        return <p>Loading......</p>
+    }
     const handlerLogin = event => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
+
+        signIn(email, password)
+            .then(result => {
+                const logged = result.user;
+                console.log(logged);
+                alert('login successFully..!')
+            })
+            .catch( error => {
+                console.log(error);
+            })
 
     }
     return (
@@ -66,7 +80,7 @@ const Login = () => {
                                 </p>
                             </div>
                             <p className='text-center text-description-color text-lg font-inter'>Have an account?
-                                <Link to='/register'>
+                                <Link to='/signup'>
                                     <span className='text-color-btn  font-semibold hover:underline'> Sign Up
                                     </span>
                                 </Link>

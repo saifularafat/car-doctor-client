@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import logo from '../../../assets/logo.svg'
+import { useContext } from "react";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import { FaUserAlt, FaUserAltSlash } from 'react-icons/fa';
+
 
 const NavBer = () => {
+    const { user } = useContext(AuthContext)
     const NavItems = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/'>About</Link></li>
@@ -29,6 +34,13 @@ const NavBer = () => {
                     {NavItems}
                 </ul>
             </div>
+            {
+                user ? <>
+                <FaUserAlt />
+                <p>Log Out</p>
+                </>
+                    : <FaUserAltSlash />
+            }
             <div className="navbar-end">
                 <Link to='login'>
                     <a className="header_btn">Appointment</a>
