@@ -3,16 +3,35 @@ import logo from '../../../assets/logo.svg'
 import { useContext } from "react";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import { FaUserAlt, FaUserAltSlash } from 'react-icons/fa';
+import Swal from "sweetalert2";
 
 
 const NavBer = () => {
-    const { user } = useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext)
+
+    const handlerSingOut = () => {
+        logOut()
+            .then(() => {
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Your Account Sign out Success..!',
+                    showConfirmButton: false,
+                    timer: 2500
+                })
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
     const NavItems = <>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/'>About</Link></li>
-        <li><Link to='/'>Service</Link></li>
-        <li><Link to='/'>Blog</Link></li>
-        <li><Link to='/'>Contact</Link></li>
+        <ul className="flex">
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to='about'>About</Link></li>
+            <li><Link to='service'>Service</Link></li>
+            <li><Link to='blog'>Blog</Link></li>
+            <li><Link to='contact'>Contact</Link></li>
+        </ul>
     </>
     return (
         <div className="navbar bg-slate-100 h-28 mb-3">
@@ -34,14 +53,21 @@ const NavBer = () => {
                     {NavItems}
                 </ul>
             </div>
-            {
-                user ? <>
-                <FaUserAlt />
-                <p>Log Out</p>
-                </>
-                    : <FaUserAltSlash />
-            }
+
             <div className="navbar-end">
+                {
+                    user ? <span className="flex items-center">
+                        <span title={user?.displayName}>
+                            <img src={user?.displayImage} alt="" />
+                            <FaUserAlt className="w-7 h-7" />
+                        </span>
+                        <button onClick={handlerSingOut}
+                            className="mx-5 border border-orange-500 py-2 px-4 hover:bg-orange-400">Log Out</button>
+                    </span>
+                        : <span className="mr-5">
+                            <FaUserAltSlash className="w-8 h-8" />
+                        </span>
+                }
                 <Link to='login'>
                     <a className="header_btn">Appointment</a>
                 </Link>

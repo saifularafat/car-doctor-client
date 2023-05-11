@@ -3,12 +3,13 @@ import img from '../../../assets/images/login/login.svg'
 import { FaFacebookF, FaLinkedinIn, FaGoogle } from 'react-icons/fa';
 import { useContext } from 'react';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
+import Swal from 'sweetalert2';
 
 const Login = () => {
-    const { loader,  signIn } = useContext(AuthContext)
+    const { loader, signIn } = useContext(AuthContext)
     // console.log(user);
 
-    if(loader){
+    if (loader) {
         return <p>Loading......</p>
     }
     const handlerLogin = event => {
@@ -22,10 +23,22 @@ const Login = () => {
             .then(result => {
                 const logged = result.user;
                 console.log(logged);
-                alert('login successFully..!')
+
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Wow Your Sing In Successfully..',
+                    showConfirmButton: false,
+                    timer: 2500
+                })
             })
-            .catch( error => {
+            .catch(error => {
                 console.log(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                  })
             })
 
     }

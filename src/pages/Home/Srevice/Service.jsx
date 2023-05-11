@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import ServiceCart from "./ServiceCart";
 
+
 const Service = () => {
     const [services, setServices] = useState([])
 
     useEffect(() => {
-        fetch('service.json')
+        fetch('http://localhost:4000/services')
             .then(res => res.json())
             .then(data => {
                 setServices(data)

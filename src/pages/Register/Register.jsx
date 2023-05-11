@@ -3,10 +3,11 @@ import img from '../../assets/images/login/login.svg'
 import { FaFacebookF, FaGoogle, FaLinkedinIn, FaEyeSlash, FaRegEyeSlash } from "react-icons/fa";
 import { useContext } from 'react';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
+import Swal from 'sweetalert2';
 
 const Register = () => {
     const { createUser, loader } = useContext(AuthContext)
-    if(loader){
+    if (loader) {
         return <p>Loading.....</p>
     }
 
@@ -18,13 +19,27 @@ const Register = () => {
         const password = form.password.value;
         const checkbox = form.checkbox.value;
         console.log(name, email, password, checkbox);
+        // if (password > 8) {
+        //    return Swal.fire({
+        //         icon: 'error',
+        //         title: 'Oops...',
+        //         text: 'Places 8 Character!',
+        //     })
+        // }
 
         createUser(email, password)
             .then(result => {
                 const user = result.user
                 console.log(user);
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Wow Your New Account Create ..',
+                    showConfirmButton: false,
+                    timer: 2500
+                })
             })
-            .catch( error => {
+            .catch(error => {
                 console.log(error);
             })
     }
@@ -42,39 +57,39 @@ const Register = () => {
                                 <label className="label">
                                     <span className="label-text">Name</span>
                                 </label>
-                                <input 
-                                type="text" 
-                                name='name'
-                                placeholder="Your Name" 
-                                required
-                                className="input input-bordered" />
+                                <input
+                                    type="text"
+                                    name='name'
+                                    placeholder="Your Name"
+                                    required
+                                    className="input input-bordered" />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input 
-                                type="email"
-                                name='email' 
-                                required
-                                placeholder="email" className="input input-bordered" />
+                                <input
+                                    type="email"
+                                    name='email'
+                                    required
+                                    placeholder="email" className="input input-bordered" />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">
                                         Confirm Password</span>
                                 </label>
-                                <input 
-                                type="password" 
-                                name='password'
-                                placeholder="password" className="input input-bordered" />
+                                <input
+                                    type="password"
+                                    name='password'
+                                    placeholder="password" className="input input-bordered" />
                                 <label className=" my-2">
-                                    <input 
-                                    type="checkbox"
-                                    name="checkbox"
-                                    required 
-                                    id="" className='mr-3'/>
-                                    <Link to= '/terms' className=''>
+                                    <input
+                                        type="checkbox"
+                                        name="checkbox"
+                                        required
+                                        id="" className='mr-3' />
+                                    <Link to='/terms' className=''>
                                         <span>Terms & Condition</span>
                                     </Link>
                                 </label>
@@ -98,9 +113,9 @@ const Register = () => {
                                         <FaGoogle className='w-5 h-5' />
                                     </span>
                                 </p>
-                                
-                               <p> {FaEyeSlash}
-                                {FaRegEyeSlash}</p>
+
+                                <p> {FaEyeSlash}
+                                    {FaRegEyeSlash}</p>
                             </div>
                             <p className='text-center text-description-color text-lg font-inter'>Already have an account?
                                 <Link to='/login'>
