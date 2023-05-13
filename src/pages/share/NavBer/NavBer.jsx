@@ -56,23 +56,34 @@ const NavBer = () => {
 
             <div className="navbar-end">
                 {
-                    user ? <span className="flex items-center">
+                    user?.email ? <span className="flex items-center">
                         <span title={user?.displayName}>
                             <img src={user?.displayImage} alt="" />
-                            <FaUserAlt className="w-7 h-7" />
+                            <FaUserAlt className="w-7 h-7" title={user?.displayName}/>
                         </span>
+                        <Link to='myBookings'>
+                            <button 
+                            className="hover:bg-slate-300 py-3 px-3 rounded-lg">
+                                My Bookings
+                            </button>
+                        </Link>
                         <button onClick={handlerSingOut}
-                            className="mx-5 border border-orange-500 py-2 px-4 hover:bg-orange-400">Log Out</button>
+                            className="login_logOut">Log Out</button>
                     </span>
-                        : <span className="mr-5">
+                        : <span className="flex items-center mr-5">
                             <FaUserAltSlash className="w-8 h-8" />
+                            <Link to='login'>
+                                <button
+                                    className="login_logOut">Login
+                                </button>
+                            </Link>
+                            <Link to='login'>
+                                <a className="header_btn">Appointment</a>
+                            </Link>
                         </span>
                 }
-                <Link to='login'>
-                    <a className="header_btn">Appointment</a>
-                </Link>
             </div>
-        </div>
+        </div >
     );
 };
 

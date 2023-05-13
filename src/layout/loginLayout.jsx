@@ -3,7 +3,7 @@ import NavBer from "../pages/share/NavBer/NavBer";
 
 const LoginLayout = () => {
     return (
-        <div>
+        <div className="max-w-6xl mx-auto">
             <NavBer />
             <Outlet />
         </div>

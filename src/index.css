@@ -2,11 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    font-family: 'Inter', sans-serif;
+}
 
 .header_btn {
     @apply md:py-3 py-2 px-6 text-lg font-inter font-semibold bg-transparent text-color-btn border-[2px]
         border-color-btn rounded-lg transition duration-200
         hover:bg-color-btn hover:text-white
+}
+
+.login_logOut {
+    @apply mx-5 text-xl hover:text-white font-inter font-medium
+    border border-color-btn py-2 transition duration-200 tracking-wide
+     px-4 hover:bg-color-btn rounded-md
 }
 
 .slider_btn1{
