@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
-import { FaFacebookF, FaGoogle, FaLinkedinIn, FaEyeSlash, FaRegEyeSlash } from "react-icons/fa";
 import { useContext } from 'react';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
+import SocialLogin from '../share/SocialLogin/SocialLogin';
 
 const Register = () => {
     const { createUser, loader } = useContext(AuthContext)
@@ -97,26 +97,7 @@ const Register = () => {
                             <div className="form-control mt-6">
                                 <input type="submit" value="Sign Up" className="main_btn" />
                             </div>
-                            <p className='text-center my-7'>Or Sign In with</p>
-                            <div className=' text-center mb-7'>
-                                <p className='inline-flex'>
-                                    <span
-                                        className='p-3 bg-slate-200 rounded-full'>
-                                        <FaFacebookF className='w-5 h-5' />
-                                    </span>
-                                    <span
-                                        className='p-3 mx-4 bg-slate-200 rounded-full'>
-                                        <FaLinkedinIn className='w-5 h-5' />
-                                    </span>
-                                    <span
-                                        className='p-3 bg-slate-200 rounded-full'>
-                                        <FaGoogle className='w-5 h-5' />
-                                    </span>
-                                </p>
-
-                                <p> {FaEyeSlash}
-                                    {FaRegEyeSlash}</p>
-                            </div>
+                            <SocialLogin />
                             <p className='text-center text-description-color text-lg font-inter'>Already have an account?
                                 <Link to='/login'>
                                     <span className='text-color-btn  font-semibold hover:underline'> Login

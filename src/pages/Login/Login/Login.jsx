@@ -1,16 +1,19 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img from '../../../assets/images/login/login.svg'
-import { FaFacebookF, FaLinkedinIn, FaGoogle } from 'react-icons/fa';
 import { useContext } from 'react';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
+import SocialLogin from '../../share/SocialLogin/SocialLogin';
 
 const Login = () => {
     const { loader, signIn } = useContext(AuthContext)
     // console.log(user);
+    const location = useLocation();
+    const navigate = useNavigate();
 
+    let from = location.state?.from?.pathname || '/'
     if (loader) {
-        return <p>Loading......</p>
+        return <progress className="progress w-56"></progress>
     }
     const handlerLogin = event => {
         event.preventDefault();
@@ -21,13 +24,15 @@ const Login = () => {
 
         signIn(email, password)
             .then(result => {
-                const logged = result.user;
-                console.log(logged);
+                const user = result.user;
+
+                console.log(user);
+                navigate(from, { replace: true })
 
                 Swal.fire({
                     position: 'top-center',
                     icon: 'success',
-                    title: 'Wow Your Sing In Successfully..',
+                    title: 'Sing In Successfully..',
                     showConfirmButton: false,
                     timer: 2500
                 })
@@ -75,23 +80,9 @@ const Login = () => {
                             <div className="form-control mt-6">
                                 <input type="submit" value="Sign In" className="main_btn" />
                             </div>
-                            <p className='text-center my-7'>Or Sign In with</p>
-                            <div className=' text-center mb-7'>
-                                <p className='inline-flex'>
-                                    <span
-                                        className='p-3 bg-slate-200 rounded-full'>
-                                        <FaFacebookF className='w-5 h-5' />
-                                    </span>
-                                    <span
-                                        className='p-3 mx-4 bg-slate-200 rounded-full'>
-                                        <FaLinkedinIn className='w-5 h-5' />
-                                    </span>
-                                    <span
-                                        className='p-3 bg-slate-200 rounded-full'>
-                                        <FaGoogle className='w-5 h-5' />
-                                    </span>
-                                </p>
-                            </div>
+
+                            <SocialLogin />
+
                             <p className='text-center text-description-color text-lg font-inter'>Have an account?
                                 <Link to='/signup'>
                                     <span className='text-color-btn  font-semibold hover:underline'> Sign Up

@@ -1,21 +1,35 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import BookingCart from "./BookingCart";
+import { useNavigate } from "react-router-dom";
 
 const Bookings = () => {
     const { user } = useContext(AuthContext)
     // console.log(user);
 
-    const [bookings, setBookings] = useState([])
+    const [ bookings, setBookings ] = useState([])
+    const navigate = useNavigate()
     console.log(bookings)
 
     const url = `http://localhost:4000/bookings?email=${user?.email}`;
     // console.log(url)
     useEffect(() => {
-        fetch(url)
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('car-access-token')}`
+            }
+        })
             .then(res => res.json())
-            .then(data => setBookings(data))
-    }, [])
+            .then(data => {
+                if(!data.error){
+                    setBookings(data)
+                }
+                else{
+                    navigate('/login');
+                }
+            })
+    }, [url, navigate])
 
     const handlerDelete = id => {
         const process = confirm("Are You Sure One service delete");
@@ -34,6 +48,27 @@ const Bookings = () => {
                 })
 
         }
+    };
+
+    const handlerBookingsUpdate = id =>{
+        fetch(`http://localhost:4000/bookings/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify({status: 'Confirm'})
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if(data.modifiedCount > 0){
+                const remaining = bookings.filter(booking => booking._d !== id);
+                const updated = bookings.find(booking =>booking._id === id);
+                updated.status = 'Confirm'
+                const newBookings = [ updated, ...remaining]
+                setBookings(newBookings) 
+            }
+        })
     }
     return (
         <div className="my-12 ">
@@ -57,9 +92,10 @@ const Bookings = () => {
                     </thead>
                     {
                         bookings.map(booking => <BookingCart
-                            key={booking._id}
-                            booking={booking}
-                            handlerDelete={handlerDelete}
+                            key = {booking._id}
+                            booking = {booking}
+                            handlerDelete = {handlerDelete}
+                            handlerBookingsUpdate = {handlerBookingsUpdate}
                         ></BookingCart>)
                     }
                 </table>

@@ -15,7 +15,7 @@ const NavBer = () => {
                 Swal.fire({
                     position: 'top-center',
                     icon: 'success',
-                    title: 'Your Account Sign out Success..!',
+                    title: 'Sign out Successful..!',
                     showConfirmButton: false,
                     timer: 2500
                 })
@@ -58,12 +58,18 @@ const NavBer = () => {
                 {
                     user?.email ? <span className="flex items-center">
                         <span title={user?.displayName}>
-                            <img src={user?.displayImage} alt="" />
-                            <FaUserAlt className="w-7 h-7" title={user?.displayName}/>
+                            {
+                                user?.photoURL ?
+                                    <div className="mr-1">
+                                        <img src={user?.photoURL} alt="" className="w-16 h-16 rounded-full" />
+                                    </div>
+                                    :
+                                    <FaUserAlt className="w-7 h-7 mr-2" title={user?.displayName} />
+                            }
                         </span>
                         <Link to='myBookings'>
-                            <button 
-                            className="hover:bg-slate-300 py-3 px-3 rounded-lg">
+                            <button
+                                className="hover:bg-slate-300 py-3 px-3 rounded-lg">
                                 My Bookings
                             </button>
                         </Link>
