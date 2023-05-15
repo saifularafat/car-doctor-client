@@ -9,8 +9,8 @@ const BookingCart = ({ booking, handlerDelete, handlerBookingsUpdate }) => {
                 <th>
                     <button
                         onClick={() => handlerDelete(_id)}
-                        className="btn btn-circle">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                        className="bg-red-600 btn-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-auto text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
                 </th>
                 <td>
@@ -39,7 +39,7 @@ const BookingCart = ({ booking, handlerDelete, handlerBookingsUpdate }) => {
                             :
                             <button
                                 onClick={() => handlerBookingsUpdate(_id)}
-                                className="btn btn-ghost btn-xs">Pending
+                                className=" bg-yellow-300 py-2 px-5 text-slate-600 rounded-lg font-inter font-semibold tracking-wide">Pending
                             </button>
                     }
                 </th>

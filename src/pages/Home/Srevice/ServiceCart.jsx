@@ -17,12 +17,6 @@ const ServiceCart = ({ service }) => {
                 <p className="text-xl font-inter font-semibold text-color-btn">${price}</p>
                 <div className="card-actions">
                 </div>
-                {/* <div className='flex justify-between items-center'> */}
-                {/* <Rating
-                        style={{ maxWidth: 120 }}
-                        value={5}
-                        readOnly
-                    /> */}
                 <div className='text-right'>
                     <Link to={`/checkOut/${_id}`}>
                         <button>
@@ -33,7 +27,6 @@ const ServiceCart = ({ service }) => {
                         </button>
                     </Link>
                 </div>
-                {/* </div> */}
             </div>
 
         </div>

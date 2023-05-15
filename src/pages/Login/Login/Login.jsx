@@ -11,7 +11,7 @@ const Login = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    let from = location.state?.from?.pathname || '/'
+    let from = location.state?.from?.pathname || '/';
     if (loader) {
         return <progress className="progress w-56"></progress>
     }
@@ -25,7 +25,6 @@ const Login = () => {
         signIn(email, password)
             .then(result => {
                 const user = result.user;
-
                 console.log(user);
                 navigate(from, { replace: true })
 

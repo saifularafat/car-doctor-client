@@ -35,7 +35,7 @@ const CheckOut = () => {
         }
         console.log(orderBooking);
 
-        fetch('http://localhost:4000/bookings', {
+        fetch('https://car-doctor-server-six-silk.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -49,7 +49,7 @@ const CheckOut = () => {
                     Swal.fire({
                         icon: 'success',
                         title: 'Wow...',
-                        text: 'Your Service Order Confirm!',
+                        text: 'Your Order Confirm!',
                     })
                 }
 
